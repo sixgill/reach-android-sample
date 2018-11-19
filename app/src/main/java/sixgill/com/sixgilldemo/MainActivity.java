@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
         }
         config.setSendEvents(enableNetworking);
         config.setAliases(aliases);
-        apiKey = "f4304e16f9903bf27ca73222bc";
         Reach.initWithAPIKey(this, apiKey, config, new ReachCallback() {
             @Override
             public void onReachSuccess() {
