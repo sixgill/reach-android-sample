@@ -1,0 +1,28 @@
+<!--
+  ~ Copyright (c) 2018, Tejashwi Kalp Taru
+  -->
+
+<resources>
+    <string name="app_name">Sixgill demo</string>
+    <string name="location_permission">Location permission</string>
+    <string name="activity_recognition">Activity Recognition</string>
+    <string name="push_permission">Push permission</string>
+    <string name="camera_permission">Camera Permission</string>
+    <string name="required_permissions">Required Permissions</string>
+    <string name="internet_access">Internet access</string>
+    <string name="wifi_permission">WIFI Permission</string>
+    <string name="bluetooth_permission">Bluetooth permission</string>
+    <string name="grant_permissions">Grant Permissions</string>
+    <string name="api_key">API Key:</string>
+    <string name="environment">Environment:</string>
+    <string name="enter_api_key">Enter API Key</string>
+    <string name="enable_networking">Enable Networking?</string>
+    <string name="start">Start</string>
+    <string name="select_environment">Select Environment:</string>
+    <string name="waiting_for_sdk_to_be_enabled">Waiting for SDK to be enabled...</string>
+    <string name="failed">Failed to enable the SDK</string>
+    <string name="stop_sdk">Stop SDK</string>
+    <string name="event_details_will_appear_below">Event details will appear below</string>
+    <string name="no_location">No location</string>
+    <string name="no_activity">No activity detected</string>
+</resources>
