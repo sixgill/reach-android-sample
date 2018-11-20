@@ -1,6 +1,7 @@
 package sixgill.com.sixgilldemo;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean useDevelopmentEndpoint = true;
     private boolean enableNetworking = false;
     public static String storeName = "DEMO-SIXGILL-ANDROID";
+    private ProgressDialog progressDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,18 +136,23 @@ public class MainActivity extends AppCompatActivity {
         }
         config.setSendEvents(enableNetworking);
         config.setAliases(aliases);
+        progressDialog = ProgressDialog.show(this, "Wait",
+                "Initializing the SDK, Please wait...", true);
+        progressDialog.setCancelable(false);
         Reach.initWithAPIKey(this, apiKey, config, new ReachCallback() {
             @Override
             public void onReachSuccess() {
                 // successfully registered the SDK
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
                 startActivity(intent);
+                progressDialog.cancel();
             }
 
             @Override
             public void onReachFailure(String s) {
                 // failed to register the SDK
                 Toast.makeText(MainActivity.this, "Failed to register the SDK", Toast.LENGTH_LONG).show();
+                progressDialog.cancel();
             }
         });
     }

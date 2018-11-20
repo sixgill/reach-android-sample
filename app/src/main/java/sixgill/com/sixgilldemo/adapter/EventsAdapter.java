@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import com.sixgill.protobuf.Ingress;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import sixgill.com.sixgilldemo.R;
 
@@ -45,7 +48,7 @@ public class EventsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.event_details, null);
+            convertView = layoutInflater.inflate(R.layout.event_details, parent, false);
             holder = new ViewHolder();
             holder.timestamp = convertView.findViewById(R.id.timestamp);
             holder.latlng = convertView.findViewById(R.id.latlng);
@@ -55,7 +58,7 @@ public class EventsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         Ingress.Event e = events.get(position);
-        String timestamp = "Timestamp: " + String.valueOf(e.getTimestamp());
+        String timestamp = "Time: " + FormatTimestamp(e.getTimestamp());
         holder.timestamp.setText(timestamp);
 
         if(e.getLocationsCount() > 0) {
@@ -76,6 +79,12 @@ public class EventsAdapter extends BaseAdapter {
             holder.activity.setText(R.string.no_activity);
         }
         return convertView;
+    }
+
+    private static String FormatTimestamp(long timestamp){
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm:ss a, MMM dd, yyyy", Locale.US);
+        Date netDate = (new Date(timestamp));
+        return sdf.format(netDate);
     }
 
     static class ViewHolder {
