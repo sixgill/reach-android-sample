@@ -55,13 +55,14 @@ public class EventsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         Ingress.Event e = events.get(position);
-        holder.timestamp.setText(String.valueOf(e.getTimestamp()));
+        String timestamp = "Timestamp: " + String.valueOf(e.getTimestamp());
+        holder.timestamp.setText(timestamp);
 
         if(e.getLocationsCount() > 0) {
             Ingress.Location location = e.getLocations(0);
             float latitude = location.getLatitude();
             float longitude = location.getLongitude();
-            String value = String.valueOf(latitude) + ", " + String.valueOf(longitude);
+            String value = "Location: " + String.valueOf(latitude) + ", " + String.valueOf(longitude);
             holder.latlng.setText(value);
         } else {
             holder.latlng.setText(R.string.no_location);
@@ -69,7 +70,8 @@ public class EventsAdapter extends BaseAdapter {
 
         if(e.getActivitiesCount() > 0) {
             Ingress.Activity activity = e.getActivities(0);
-            holder.activity.setText(activity.getType());
+            String activityText = "Activity: " + activity.getType();
+            holder.activity.setText(activityText);
         } else {
             holder.activity.setText(R.string.no_activity);
         }

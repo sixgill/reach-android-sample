@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import com.sixgill.sync.sdk.Reach;
 import com.sixgill.sync.sdk.ReachCallback;
 
 import sixgill.com.sixgilldemo.adapter.EventsAdapter;
+
+import static sixgill.com.sixgilldemo.MainActivity.storeName;
 
 public class DetailsActivity extends AppCompatActivity {
     private boolean receiverAttached = false;
@@ -46,6 +49,11 @@ public class DetailsActivity extends AppCompatActivity {
                 status.setVisibility(View.GONE);
                 LinearLayout detailsBox = findViewById(R.id.detailsBox);
                 detailsBox.setVisibility(View.VISIBLE);
+
+                //save the status that SDK was enabled, so on next app start we skip the login screen
+                SharedPreferences.Editor editor = getSharedPreferences(storeName, MODE_PRIVATE).edit();
+                editor.putInt("running", 1);
+                editor.apply();
             }
 
             @Override
@@ -62,7 +70,11 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // stop the SDK
                 Reach.disable(DetailsActivity.this);
-                // close the screen
+                //save the status that SDK was stopped by user
+                SharedPreferences.Editor editor = getSharedPreferences(storeName, MODE_PRIVATE).edit();
+                editor.putInt("running", 0);
+                editor.apply();
+
                 finish();
             }
         });
