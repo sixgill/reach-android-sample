@@ -4,7 +4,9 @@
 ## Overview
 This repository contains the sample app and source code to demonstrate the basic use of Sixgill Reach SDK. 
 You can find the complete SDK documentation [here](https://github.com/sixgill/sense-docs/blob/master/guides/002-sdks/002-android-sdk.md)
-##### [Download sample app](https://github.com/sixgill/reach-android-sample/raw/initial-setup/Android%20sample%20build.apk)
+
+*Reach SDK version: 1.2.7*
+##### [Download sample app](https://github.com/sixgill/reach-android-sample/raw/initial-setup/android-sample-build.apk)
 
 ## Implementation details
 Reach SDK requires some permissions in order to work properly. Skipping some of the permissions will disable the related feature, for example if you skip the location permission then SDK won't be able to collect the location of the user.
@@ -43,14 +45,32 @@ To start the SDK we need to pass some of the basic information:
 - API Key
 - Aliases (can be unique phone number)
 
-Additionally you can turn off the functionality of the SDK to stop sending the events to Sixgill server (by default this is ON).
+You can turn off the functionality of the SDK to stop sending the events to Sixgill server (by default this is ON).
 
 See [MainActivity.java](https://github.com/sixgill/reach-android-sample/blob/initial-setup/app/src/main/java/sixgill/com/sixgilldemo/MainActivity.java#L114)
 ```java
 ReachConfig config = new ReachConfig();
 config.setSendEvents(false);
 ```
-Finally to start the SDK you can call the `initWithAPIKey` method of the SDK
+
+Optionally you can also provide Notification builder to customize the notifications.
+```java
+//custom notification builder for sticky notification
+Notification.Builder stickyBuilder = new Notification.Builder(getApplicationContext())
+        .setContentTitle("Reach SDK") // custom sticky notification title
+        .setContentText("This shows demo of sticky notification") // custom sticky notification body
+        .setSmallIcon(R.drawable.sticky_notification_icon) // custom icon for sticky notifications
+        .setAutoCancel(true);
+config.setStickyNotificationBuilder(stickyBuilder);
+
+// custom notification builder for any notification
+Notification.Builder notification = new Notification.Builder(getApplicationContext())
+        .setSmallIcon(R.drawable.notification_icon) // custom icon for normal notifications
+        .setAutoCancel(true);
+config.setNotificationBuilder(notification);
+```
+
+Finally to start the SDK you can call the `initWithAPIKey` method of the SDK. 
 ```java
 Map<String, String> aliases = new HashMap<>();
 aliases.put("phone", phoneNumber);

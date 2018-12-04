@@ -1,6 +1,7 @@
 package sixgill.com.sixgilldemo;
 
 import android.Manifest;
+import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -136,6 +137,21 @@ public class MainActivity extends AppCompatActivity {
         }
         config.setSendEvents(enableNetworking);
         config.setAliases(aliases);
+
+        //custom notification builder for sticky notification
+        Notification.Builder stickyBuilder = new Notification.Builder(getApplicationContext())
+                .setContentTitle("Reach SDK") // custom sticky notification title
+                .setContentText("This shows demo of sticky notification") // custom sticky notification body
+                .setSmallIcon(R.drawable.sticky_notification_icon) // custom icon for sticky notifications
+                .setAutoCancel(true);
+        config.setStickyNotificationBuilder(stickyBuilder);
+
+        // custom notification builder for any notification
+        Notification.Builder notification = new Notification.Builder(getApplicationContext())
+                .setSmallIcon(R.drawable.notification_icon) // custom icon for normal notifications
+                .setAutoCancel(true);
+        config.setNotificationBuilder(notification);
+
         progressDialog = ProgressDialog.show(this, "Wait",
                 "Initializing the SDK, Please wait...", true);
         progressDialog.setCancelable(false);
