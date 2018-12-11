@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private boolean useDevelopmentEndpoint = true;
+    private boolean useProductionEndpoint = true;
     private boolean enableNetworking = false;
     public static String storeName = "DEMO-SIXGILL-ANDROID";
     private ProgressDialog progressDialog = null;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-        String[] items = new String[]{"https://edge-ingress.staging.sixgill.io", "https://sense-ingress-api.sixgill.com"};
+        String[] items = new String[]{"https://sense-ingress-api.sixgill.com", "https://edge-ingress.staging.sixgill.io"};
         Spinner dropdown = findViewById(R.id.api_selector);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                useDevelopmentEndpoint = position == 0;
+                useProductionEndpoint = position == 0;
             }
 
             @Override
@@ -130,10 +130,10 @@ public class MainActivity extends AppCompatActivity {
         aliases.put("phone", phone);
 
         ReachConfig config = new ReachConfig();
-        if (useDevelopmentEndpoint) {
-            config.setIngressURL("https://edge-ingress.staging.sixgill.io");
-        } else {
+        if (useProductionEndpoint) {
             config.setIngressURL("https://sense-ingress-api.sixgill.com");
+        } else {
+            config.setIngressURL("https://edge-ingress.staging.sixgill.io");
         }
         config.setSendEvents(enableNetworking);
         config.setAliases(aliases);
