@@ -29,6 +29,10 @@ public class EventsAdapter extends BaseAdapter {
         events.add(event);
     }
 
+    public void clearEvents(){
+        events.clear();
+    }
+
     @Override
     public int getCount() {
         return events.size();
@@ -53,6 +57,7 @@ public class EventsAdapter extends BaseAdapter {
             holder.timestamp = convertView.findViewById(R.id.timestamp);
             holder.latlng = convertView.findViewById(R.id.latlng);
             holder.activity = convertView.findViewById(R.id.activity);
+            holder.errors = convertView.findViewById(R.id.errors);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -69,6 +74,18 @@ public class EventsAdapter extends BaseAdapter {
             holder.latlng.setText(value);
         } else {
             holder.latlng.setText(R.string.no_location);
+        }
+        if(e.getErrorCount() > 0){
+            StringBuilder errorData = new StringBuilder();
+            errorData.append("Errors:");
+            List<Ingress.Error> errors = e.getErrorList();
+            for(Ingress.Error err : errors){
+                String errMsg = "Message: " + err.getErrorMessage() + ", Code: " + err.getErrorCode();
+                errorData.append("\n").append(errMsg);
+            }
+            holder.errors.setText(errorData);
+        } else {
+            holder.errors.setText(R.string.no_error);
         }
 
         if(e.getActivitiesCount() > 0) {
@@ -91,5 +108,6 @@ public class EventsAdapter extends BaseAdapter {
         TextView timestamp;
         TextView latlng;
         TextView activity;
+        TextView errors;
     }
 }

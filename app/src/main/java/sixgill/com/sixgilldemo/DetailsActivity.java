@@ -27,6 +27,7 @@ import static sixgill.com.sixgilldemo.MainActivity.storeName;
 public class DetailsActivity extends AppCompatActivity {
     private boolean receiverAttached = false;
     EventsAdapter adapter = null;
+    private boolean sdkDisabled = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +55,7 @@ public class DetailsActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences(storeName, MODE_PRIVATE).edit();
                 editor.putInt("running", 1);
                 editor.apply();
+                sdkDisabled = false;
             }
 
             @Override
@@ -61,21 +63,50 @@ public class DetailsActivity extends AppCompatActivity {
                 Toast.makeText(DetailsActivity.this, "Failed to enable the SDK", Toast.LENGTH_LONG).show();
                 TextView status = findViewById(R.id.status);
                 status.setText(R.string.failed);
+                sdkDisabled = true;
             }
         });
 
-        Button stopSdk = findViewById(R.id.stopSdk);
+        final Button stopSdk = findViewById(R.id.stopSdk);
         stopSdk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // stop the SDK
-                Reach.disable(DetailsActivity.this);
-                //save the status that SDK was stopped by user
-                SharedPreferences.Editor editor = getSharedPreferences(storeName, MODE_PRIVATE).edit();
-                editor.putInt("running", 0);
-                editor.apply();
+                if (!sdkDisabled) {
+                    // stop the SDK
+                    Reach.disable(DetailsActivity.this);
+                    //save the status that SDK was stopped by user
+                    SharedPreferences.Editor editor = getSharedPreferences(storeName, MODE_PRIVATE).edit();
+                    editor.putInt("running", 0);
+                    editor.apply();
+                    sdkDisabled = true;
+                    stopSdk.setText(R.string.enable_sdk);
+                } else {
+                    Reach.enable(DetailsActivity.this);
+                    //save the status that SDK was stopped by user
+                    SharedPreferences.Editor editor = getSharedPreferences(storeName, MODE_PRIVATE).edit();
+                    editor.putInt("running", 1);
+                    editor.apply();
+                    sdkDisabled = false;
+                    stopSdk.setText(R.string.stop_sdk);
+                }
+            }
+        });
 
-                finish();
+        Button forceSensor = findViewById(R.id.forcesensor);
+        forceSensor.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Reach.forceSensorUpdate(DetailsActivity.this);
+                Toast.makeText(DetailsActivity.this, "Event will be generated in 20 seconds", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button clearList = findViewById(R.id.clearlist);
+        clearList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                adapter.clearEvents();
+                adapter.notifyDataSetChanged();
             }
         });
     }

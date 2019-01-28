@@ -142,13 +142,13 @@ public class MainActivity extends AppCompatActivity {
         Notification.Builder stickyBuilder = new Notification.Builder(getApplicationContext())
                 .setContentTitle("Reach SDK") // custom sticky notification title
                 .setContentText("This shows demo of sticky notification") // custom sticky notification body
-                .setSmallIcon(R.drawable.sticky_notification_icon) // custom icon for sticky notifications
+                .setSmallIcon(R.drawable.sticky) // custom icon for sticky notifications
                 .setAutoCancel(true);
         config.setStickyNotificationBuilder(stickyBuilder);
 
         // custom notification builder for any notification
         Notification.Builder notification = new Notification.Builder(getApplicationContext())
-                .setSmallIcon(R.drawable.notification_icon) // custom icon for normal notifications
+                .setSmallIcon(R.drawable.notification) // custom icon for normal notifications
                 .setAutoCancel(true);
         config.setNotificationBuilder(notification);
 
@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
                 startActivity(intent);
                 progressDialog.cancel();
+                finish();
             }
 
             @Override

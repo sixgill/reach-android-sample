@@ -25,4 +25,8 @@
     <string name="send_to_sixgill_server">Send to Sixgill server</string>
     <string name="pick_ingress_url">Pick Ingress URL</string>
     <string name="start_sdk">Start SDK</string>
+    <string name="enable_sdk">Enable SDK</string>
+    <string name="no_error">No error during this event</string>
+    <string name="force_sensor_update">Force sensor update</string>
+    <string name="clear_events_list">Clear events list</string>
 </resources>

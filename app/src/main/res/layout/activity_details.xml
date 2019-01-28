@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
-
     <TextView
         android:visibility="gone"
         android:id="@+id/status"
@@ -13,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/waiting_for_sdk_to_be_enabled"/>
-
     <LinearLayout
         android:id="@+id/detailsBox"
         android:orientation="vertical"
@@ -31,7 +29,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/eventsList"
             android:layout_width="match_parent"
-            android:layout_height="400dp">
+            android:layout_height="300dp">
         </ListView>
         <Button
             android:id="@+id/stopSdk"
@@ -39,7 +37,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/stop_sdk"/>
+        <Button
+            android:id="@+id/forcesensor"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/force_sensor_update"/>
+        <Button
+            android:id="@+id/clearlist"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_events_list"/>
 
     </LinearLayout>
-
 </LinearLayout>
