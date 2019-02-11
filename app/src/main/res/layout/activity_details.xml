@@ -29,7 +29,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/eventsList"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="250dp">
         </ListView>
         <Button
             android:id="@+id/stopSdk"
@@ -43,6 +43,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/force_sensor_update"/>
+        <Button
+            android:id="@+id/ondemandlocation"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/on_demand_location"/>
         <Button
             android:id="@+id/clearlist"
             android:layout_marginTop="5dp"

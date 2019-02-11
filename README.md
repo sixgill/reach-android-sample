@@ -5,7 +5,7 @@
 This repository contains the sample app and source code to demonstrate the basic use of Sixgill Reach SDK. 
 You can find the complete SDK documentation [here](https://github.com/sixgill/sense-docs/blob/master/guides/002-sdks/002-android-sdk.md)
 
-*Reach SDK version: 1.2.9*
+*Reach SDK version: 1.2.10*
 ##### [Download sample app](https://github.com/sixgill/reach-android-sample/raw/master/android-sample-build.apk)
 
 ## Implementation details
@@ -149,10 +149,22 @@ Finally to stop the SDK, you need to call `disable` method of SDK
 Reach.disable(DetailsActivity.this);
 ```
 
-Reach SDK also provides you functionality to generate event on demand. 
+Reach SDK also provides you functionality to generate event and location on demand. 
 ```java
 // forceSensorUpdate will generate the event on demand, minimum duration to generate an event is 20 seconds. Any on demand event generated can be received in the local broadcast listner, described above in this readme
 Reach.forceSensorUpdate(DetailsActivity.this);
+```
+```java
+Reach.getNotification(context, new ReachNotificationCallback(){
+    @Override
+    public void onLocationSuccess(Ingress.Location location) {
+
+    }
+    @Override
+    public void onLocationFailure(Ingress.Error error) {
+        
+    }
+});
 ```
 
 If any permission is missing, Reach SDK will generate error code and error message in the event itself. To check the errors, you can call `getErrorCount()` method and `getErrorList()` method

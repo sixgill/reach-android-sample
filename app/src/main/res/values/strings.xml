@@ -29,4 +29,5 @@
     <string name="no_error">No error during this event</string>
     <string name="force_sensor_update">Force sensor update</string>
     <string name="clear_events_list">Clear events list</string>
+    <string name="on_demand_location">On demand location</string>
 </resources>

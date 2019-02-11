@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.sixgill.protobuf.Ingress;
 import com.sixgill.sync.sdk.Reach;
 import com.sixgill.sync.sdk.ReachCallback;
+import com.sixgill.sync.sdk.ReachLocationCallback;
 
 import sixgill.com.sixgilldemo.adapter.EventsAdapter;
 
@@ -98,6 +99,24 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Reach.forceSensorUpdate(DetailsActivity.this);
                 Toast.makeText(DetailsActivity.this, "Event will be generated in 20 seconds", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button onDemandLocation = findViewById(R.id.ondemandlocation);
+        onDemandLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Reach.getLocation(DetailsActivity.this, new ReachLocationCallback() {
+                    @Override
+                    public void onLocationSuccess(Ingress.Location location) {
+                        Toast.makeText(DetailsActivity.this, location.toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onLocationFailure(Ingress.Error error) {
+                        Toast.makeText(DetailsActivity.this, error.getErrorMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 

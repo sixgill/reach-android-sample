@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //check is SDK was started earlier or not
+        //check if SDK was started earlier or not
         SharedPreferences prefs = getSharedPreferences(storeName, MODE_PRIVATE);
         int running = prefs.getInt("running", 0);
 
