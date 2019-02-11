@@ -1,5 +1,5 @@
 
-# Sixgill Reach SDK sample integration app
+# Android app to demonstrate Sixgill Reach SDK
 
 ## Overview
 This repository contains the sample app and source code to demonstrate the basic use of Sixgill Reach SDK. 
