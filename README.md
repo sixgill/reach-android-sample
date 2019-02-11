@@ -151,11 +151,13 @@ Reach.disable(DetailsActivity.this);
 
 Reach SDK also provides you functionality to generate event and location on demand. 
 ```java
-// forceSensorUpdate will generate the event on demand, minimum duration to generate an event is 20 seconds. Any on demand event generated can be received in the local broadcast listner, described above in this readme
+// forceSensorUpdate will generate the event on demand, minimum duration to generate an event is 20 seconds. 
+// Any on demand event generated can be received in the local broadcast listner, described above in this readme
 Reach.forceSensorUpdate(DetailsActivity.this);
 ```
 ```java
-Reach.getNotification(context, new ReachNotificationCallback(){
+// getLocation will return on demand location or Ingress.Error in the ReachLocationCallback
+Reach.getLocation(context, new ReachLocationCallback(){
     @Override
     public void onLocationSuccess(Ingress.Location location) {
 
