@@ -5,7 +5,7 @@
 This repository contains the sample app and source code to demonstrate the basic use of Sixgill Reach SDK. 
 You can find the complete SDK documentation [here](https://github.com/sixgill/sense-docs/blob/master/guides/002-sdks/002-android-sdk.md)
 
-*Reach SDK version: 1.2.10*
+*Reach SDK version: 1.3.4*
 ##### [Download sample app](https://github.com/sixgill/reach-android-sample/raw/master/android-sample-build.apk)
 
 ## Implementation details
@@ -53,21 +53,17 @@ ReachConfig config = new ReachConfig();
 config.setSendEvents(false);
 ```
 
-Optionally you can also provide Notification builder to customize the notifications.
+Optionally you can also provide notifications data to customize notifications.
+
+**This is a breaking change prior v1.3.4, previous versions were using Notification Builders**
 ```java
 //custom notification builder for sticky notification
-Notification.Builder stickyBuilder = new Notification.Builder(getApplicationContext())
-        .setContentTitle("Reach SDK") // custom sticky notification title
-        .setContentText("This shows demo of sticky notification") // custom sticky notification body
-        .setSmallIcon(R.drawable.sticky_notification_icon) // custom icon for sticky notifications
-        .setAutoCancel(true);
-config.setStickyNotificationBuilder(stickyBuilder);
+config.setStickyNotificationTitle("Reach SDK");
+config.setStickyNotificationBody("This shows demo of sticky notification");
+config.setStickyNotificationIcon(R.drawable.sticky);
 
 // custom notification builder for any notification
-Notification.Builder notification = new Notification.Builder(getApplicationContext())
-        .setSmallIcon(R.drawable.notification_icon) // custom icon for normal notifications
-        .setAutoCancel(true);
-config.setNotificationBuilder(notification);
+config.setNotificationIcon(R.drawable.notification);
 ```
 
 Finally to start the SDK you can call the `initWithAPIKey` method of the SDK. 
@@ -142,6 +138,11 @@ protected void onDestroy() {
     // unregister the local broadcast receiver to prevent memory leak
     LocalBroadcastManager.getInstance(this).unregisterReceiver(mEventReceiver);
 }
+```
+
+You can also customize the device name, so that it can be uniquely identified in the Sense dashboard
+```java
+Reach.setDeviceName(mContext, "Reach-Sample");
 ```
 
 Finally to stop the SDK, you need to call `disable` method of SDK

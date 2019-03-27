@@ -30,10 +30,11 @@ dependencies {
     implementation project(':sdk')
     implementation 'com.google.protobuf:protobuf-java:3.4.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-protobuf:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-protobuf:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.google.code.gson:gson:2.8.2'
-    implementation 'com.google.android.gms:play-services-gcm:16.0.0'
+    implementation 'com.google.android.gms:play-services-gcm:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation "android.arch.persistence.room:runtime:1.1.1"
     implementation 'com.google.android.gms:play-services-fitness:16.0.1'

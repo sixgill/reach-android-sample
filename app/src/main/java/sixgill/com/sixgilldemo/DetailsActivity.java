@@ -42,6 +42,8 @@ public class DetailsActivity extends AppCompatActivity {
         Reach.enable(this, true, new ReachCallback() {
             @Override
             public void onReachSuccess() {
+                // we can also set a device name
+                Reach.setDeviceName(DetailsActivity.this, "Reach-Sample");
                 // setup a local broadcast receiver to get events from SDK
                 LocalBroadcastManager manager = LocalBroadcastManager.getInstance(DetailsActivity.this);
                 manager.registerReceiver(mEventReceiver, new IntentFilter(Reach.EVENT_BROADCAST));

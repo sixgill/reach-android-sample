@@ -139,18 +139,12 @@ public class MainActivity extends AppCompatActivity {
         config.setAliases(aliases);
 
         //custom notification builder for sticky notification
-        Notification.Builder stickyBuilder = new Notification.Builder(getApplicationContext())
-                .setContentTitle("Reach SDK") // custom sticky notification title
-                .setContentText("This shows demo of sticky notification") // custom sticky notification body
-                .setSmallIcon(R.drawable.sticky) // custom icon for sticky notifications
-                .setAutoCancel(true);
-        config.setStickyNotificationBuilder(stickyBuilder);
+        config.setStickyNotificationTitle("Reach SDK");
+        config.setStickyNotificationBody("This shows demo of sticky notification");
+        config.setStickyNotificationIcon(R.drawable.sticky);
 
         // custom notification builder for any notification
-        Notification.Builder notification = new Notification.Builder(getApplicationContext())
-                .setSmallIcon(R.drawable.notification) // custom icon for normal notifications
-                .setAutoCancel(true);
-        config.setNotificationBuilder(notification);
+        config.setNotificationIcon(R.drawable.notification);
 
         progressDialog = ProgressDialog.show(this, "Wait",
                 "Initializing the SDK, Please wait...", true);
